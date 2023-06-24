@@ -2,6 +2,8 @@ pipeline {
     agent any
     tools {
         nodejs "node-16.20.1"
+        withNpmrc(config: 'registry=https://registry.npm.taobao.org\nsass_binary_site=https://npm.taobao.org/mirrors/node-sass/') {
+        }
     }
     // environment {
     //     CI = 'true'
@@ -9,9 +11,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 withNpmrc(config: 'registry=https://registry.npm.taobao.org\nsass_binary_site=https://npm.taobao.org/mirrors/node-sass/') {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
         // stage('Test') {
